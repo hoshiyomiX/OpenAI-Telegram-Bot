@@ -7,7 +7,7 @@ Telegram bot dengan APi ChatGPT yang bisa menjawab dan mempermudah proses kegiat
 - Buka telegram dan cari akun @botfather buat Bot dan simpan APi Tokennya
 - Clone repository atau bisa download Repository ini
 ```bash
-git clone https://github.com/wannazid/OpenAI-Telegram-Bot
+git clone https://github.com/RiProG-id/OpenAI-Telegram-Bot
 cd OpenAI-Telegram-Bot
 ```
 - Edit APi Token dan APi Key sesuai dengan yang kalian buat
