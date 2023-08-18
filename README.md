@@ -1,7 +1,3 @@
-![alt text]
-
-(https://github.com/wannazid/.jpg)
-
 # OpenAI ChatGPT Telegram Bot
 Telegram bot dengan APi ChatGPT yang bisa menjawab dan mempermudah proses kegiatan manusia dalam mengerjakan sesuatu.
 # Cara Install
