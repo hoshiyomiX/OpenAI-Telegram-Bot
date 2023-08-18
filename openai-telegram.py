@@ -3,25 +3,42 @@
 import openai
 from aiogram import Bot, Dispatcher, types, executor
 
-bot_tkn = 'TOKEN_BOT_TELEGRAM_ANDA'
-openai.api_key = 'KUNCI_API_OPENAI_ANDA'
-
 bot = Bot(token=bot_tkn)
 dp = Dispatcher(bot=bot)
 
+# Dictionary untuk menyimpan pertanyaan-pertanyaan yang diajukan oleh setiap pengguna
+user_questions = {}
+
 @dp.message_handler(commands=['start', 'help'])
 async def user_come(pesan: types.Message):
-    await pesan.answer('Selamat Datang, silahkan tanyakan apa saja yang ingin anda ketahui')
+    await pesan.answer('Selamat Datang! Silakan tanyakan apa saja yang ingin Anda ketahui dengan memulai pesan "/tanya pertanyaan".')
 
-@dp.message_handler(lambda message: message.text.startswith('/ask'))
-async def ai_answer(message: types.Message):
-    prompt = message.text[len('/ask'):].strip()
-    if prompt:
-        respon = openai.Completion.create(model='text-davinci-003', prompt=prompt, temperature=0.7, max_tokens=100)
-        parse = respon['choices'][0]['text']
-        await message.reply(parse)
+@dp.message_handler(lambda message: not message.from_user.is_bot and message.text.startswith('/tanya '))
+async def process_ask(message: types.Message):
+    user_id = message.from_user.id
+    question = message.text[len('/tanya '):].strip()
+    user_questions[user_id] = [question]
+    if len(question.split()) > 1:  # Memeriksa apakah ada lebih dari satu kata dalam pertanyaan
+        bot_response = await get_bot_response(question)
+        await message.reply(bot_response)
     else:
-        await message.reply("Mohon masukkan pertanyaan setelah '/ask'")
+        await message.reply("Peringatan: Pertanyaan sangat pendek.")
+
+@dp.message_handler(lambda message: message.reply_to_message is not None)
+async def process_reply(message: types.Message):
+    user_id = message.from_user.id
+    if user_id in user_questions:
+        question = message.reply_to_message.text + " " + message.text
+        user_questions[user_id].append(question)
+        if len(question.split()) > 1:  # Memeriksa apakah ada lebih dari satu kata dalam pertanyaan
+            bot_response = await get_bot_response(question)
+            await message.reply(bot_response)
+        else:
+            await message.reply("Peringatan: Pertanyaan sangat pendek.")
+
+async def get_bot_response(question):
+    respon = openai.Completion.create(model='text-davinci-003', prompt=question, temperature=0.7, max_tokens=100)
+    return respon['choices'][0]['text']
 
 print('Bot berjalan !')
 executor.start_polling(dp)
