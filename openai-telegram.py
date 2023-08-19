@@ -41,7 +41,7 @@ async def process_reply(message: types.Message):
             await message.reply("Pertanyaan Anda terlalu pendek. Harap berikan pertanyaan yang lebih jelas dan lengkap.")
 
 async def get_bot_response(question):
-    respon = openai.Completion.create(model='text-davinci-003', prompt=question, temperature=0.7, max_tokens=50)  # Mengurangi jumlah max_tokens
+    respon = openai.Completion.create(model='text-davinci-003', prompt=question, temperature=0.7, max_tokens=1000)
     return respon['choices'][0]['text']
 
 print('Bot berjalan !')
