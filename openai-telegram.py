@@ -1,5 +1,6 @@
 # Telegram Bot OpenAI ChatGPT version Python by Wannazid
 # Remake by RiProG-id
+
 import openai
 from aiogram import Bot, Dispatcher, types, executor
 
@@ -25,9 +26,9 @@ async def process_ask(message: types.Message):
         bot_response = await get_bot_response(question)
         await message.reply(bot_response)
     else:
-        await message.reply("Peringatan: Pertanyaan sangat pendek.")
+        await message.reply("Pertanyaan Anda terlalu pendek. Harap berikan pertanyaan yang lebih jelas dan lengkap.")
 
-@dp.message_handler(lambda message: message.reply_to_message is not None)
+@dp.message_handler(lambda message: message.reply_to_message is not None and message.reply_to_message.from_user.is_bot and message.reply_to_message.from_user.id == bot.id)
 async def process_reply(message: types.Message):
     user_id = message.from_user.id
     if user_id in user_questions:
@@ -37,10 +38,10 @@ async def process_reply(message: types.Message):
             bot_response = await get_bot_response(question)
             await message.reply(bot_response)
         else:
-            await message.reply("Peringatan: Pertanyaan sangat pendek.")
+            await message.reply("Pertanyaan Anda terlalu pendek. Harap berikan pertanyaan yang lebih jelas dan lengkap.")
 
 async def get_bot_response(question):
-    respon = openai.Completion.create(model='text-davinci-003', prompt=question, temperature=0.7, max_tokens=100)
+    respon = openai.Completion.create(model='text-davinci-003', prompt=question, temperature=0.7, max_tokens=50)  # Mengurangi jumlah max_tokens
     return respon['choices'][0]['text']
 
 print('Bot berjalan !')
