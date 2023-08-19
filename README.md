@@ -19,3 +19,8 @@ pip install -r requirements.txt
 python openai-telegram.py
 ```
 - Selamat anda berhasil membuat Bot ChatGPT
+
+- Untuk pengguna replit jalankan sebelum program bot agar terus berjalan
+```bash
+node keep-alive.js
+```
