@@ -4,6 +4,19 @@ Telegram bot dengan APi ChatGPT yang bisa menjawab dan mempermudah proses kegiat
 - Daftar akun OpenAI untuk mendapatkan APi Key di https://openai.com/api
 - Masuk ke account -> APi dan kalian generate APi
 - Buka telegram dan cari akun @botfather buat Bot dan simpan APi Tokennya
+- install git dan python pip (replit not required)
+  
+  ubuntu/debian
+  ```bash
+  apt update
+  apt install git python-pip
+  ```
+  termux
+  ```sh
+  pkg update
+  pkg install git python-pip
+  ```
+  
 - Clone repository atau bisa download Repository ini
 ```bash
 git clone https://github.com/RiProG-id/OpenAI-Telegram-Bot
