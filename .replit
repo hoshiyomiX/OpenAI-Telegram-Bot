@@ -5,6 +5,6 @@ entrypoint = "openai-telegram.py"
 [nix]
 channel = "stable-23_05"
 [deployment]
-run = ["sh", "-c", "pip install -r requirements.txt python3 openai-telegram.py"]
+run = ["sh", "-c", "pip install -r requirements.txt && python3 openai-telegram.py"]
 deploymentTarget = "cloudrun"
 package.allowAutoUpdate = false
