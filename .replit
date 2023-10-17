@@ -1,7 +1,7 @@
 modules = ["python-3.10:v18-20230807-322e88b"]
 hidden = [".pythonlibs"]
 run = "pip install -r requirements.txt && pip install Flask && python3 openai-telegram.py"
-entrypoint = "main.py"
+entrypoint = "openai-telegram.py"
 [nix]
 channel = "stable-23_05"
 [deployment]
