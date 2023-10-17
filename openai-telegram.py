@@ -4,6 +4,9 @@
 import openai
 from aiogram import Bot, Dispatcher, types, executor
 
+from keep_alive import keep_alive
+keep_alive()
+
 bot_tkn = 'TOKEN_BOT_TELEGRAM_ANDA'
 openai.api_key = 'KUNCI_API_OPENAI_ANDA'
 
