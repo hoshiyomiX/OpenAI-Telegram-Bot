@@ -1,4 +1,4 @@
-~# Telegram Bot OpenAI ChatGPT versi Python oleh Wannazid
+# Telegram Bot OpenAI ChatGPT versi Python oleh Wannazid
 # Dibuat ulang oleh RiProG-id
 
 import openai
@@ -13,7 +13,6 @@ openai.api_key = 'KUNCI_API_OPENAI_ANDA'
 bot = Bot(token=bot_tkn)
 dp = Dispatcher(bot=bot)
 
-# Dictionary to store questions asked by each user
 user_questions = {}
 
 @dp.message_handler(commands=['start', 'help'])
@@ -25,7 +24,7 @@ async def process_ask(message: types.Message):
     user_id = message.from_user.id
     question = message.text[len('/tanya '):].strip()
     user_questions[user_id] = [question]
-    if len(question.split()) > 1:  # Check if there is more than one word in the question
+    if len(question.split()) > 1:  
         bot_response = await get_bot_response(question)
         await message.reply(bot_response)
     else:
@@ -37,7 +36,7 @@ async def process_reply(message: types.Message):
     if user_id in user_questions:
         question = message.reply_to_message.text + " " + message.text
         user_questions[user_id].append(question)
-        if len(question.split()) > 1:  # Check if there is more than one word in the question
+        if len(question.split()) > 1:  
             bot_response = await get_bot_response(question)
             await message.reply(bot_response)
         else:
