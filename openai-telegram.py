@@ -7,8 +7,8 @@ from aiogram import Bot, Dispatcher, types, executor
 from keep_alive import keep_alive
 keep_alive()
 
-bot_tkn = 'TOKEN_BOT_TELEGRAM_ANDA'
-openai.api_key = 'KUNCI_API_OPENAI_ANDA'
+bot_tkn = '6559421973:AAFKDg5Ah7xPafoEqX-9QWN_7g2G7OTbGtc'
+openai.api_key = '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'
 
 bot = Bot(token=bot_tkn)
 dp = Dispatcher(bot=bot)
